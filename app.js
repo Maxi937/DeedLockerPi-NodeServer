@@ -1,19 +1,26 @@
 "use strict";
 
-import fetch from 'node-fetch';
+const dotenv = require('dotenv');
+const fetch = require('node-fetch');
+const logger = require('./config/logger.js');
+const express = require("express");
+const path = require("path");
+const deedlockerPi = require("./deedlockerPi")
 
-test();
 
-async function test() {
-  const url = 'https://deed-locker.onrender.com/deedlockerPi/test'
+// Express
+var app = express();
 
-  try {
-    const response = await fetch(url);
-    console.log(await response.json())
-    //const myJson = await response.json();
-    //console.log(myJson);
-  } catch (err) {
-    console.log(err)
-  }
-}
+// Body
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
+
+// Start Server
+const PORT = process.env.PORT || 4000;
+
+app.listen(
+  PORT,
+  logger.info(`Server Running on port ${PORT}`,
+  deedlockerPi.getUsers())
+);

@@ -5,11 +5,11 @@ import fetch from 'node-fetch';
 test();
 
 async function test() {
-  console.log("Hello World")
+  const url = 'https://deed-locker.onrender.com/deedlockerPi/test'
 
   try {
-    const response = await fetch('https://deed-locker.onrender.com/deedlockerPi/test');
-    console.log(response)
+    const response = await fetch(url);
+    console.log(await response.json())
     //const myJson = await response.json();
     //console.log(myJson);
   } catch (err) {

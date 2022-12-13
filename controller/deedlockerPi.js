@@ -2,7 +2,7 @@
 
 const dotenv = require('dotenv');
 const fetch = require('node-fetch');
-const logger = require('./config/logger.js');
+const logger = require('../config/logger.js');
 
 // Load Config
 dotenv.config({ path: "./config/config.env" });

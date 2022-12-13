@@ -1,12 +1,14 @@
 "use strict";
 
-const dotenv = require('dotenv');
-const fetch = require('node-fetch');
-const logger = require('./config/logger.js');
+const dotenv = require("dotenv");
 const express = require("express");
 const path = require("path");
-const deedlockerPi = require("./controller/deedlockerPi")
+const exphbs = require("express-handlebars");
+const router = require("./router");
+const logger = require("./config/logger");
 
+
+logger.info("here")
 
 // Express
 var app = express();
@@ -34,10 +36,13 @@ app.engine(
 );
 app.set("view engine", ".hbs");
 
+// Router
+app.use("/", router);
+
 // Start Server
 const PORT = process.env.PORT || 4000;
 
 app.listen(
   PORT,
-  logger.info(`Server Running on port ${PORT}`)
+  logger.info(`Server Running in ${app.get("env")} mode on port ${PORT}`)
 );

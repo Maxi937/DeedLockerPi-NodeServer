@@ -1,6 +1,6 @@
 # **Description**
 
-Node Server to interface and control RFC Rasberry Pi
+Node Server to interface and control NFC Rasberry Pi
 
 <br>
 

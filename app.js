@@ -1,14 +1,11 @@
 "use strict";
 
 const dotenv = require("dotenv");
-const express = require("express");
+var express = require("express");
 const path = require("path");
 const exphbs = require("express-handlebars");
 const router = require("./router");
 const logger = require("./config/logger");
-
-
-logger.info("here")
 
 // Express
 var app = express();

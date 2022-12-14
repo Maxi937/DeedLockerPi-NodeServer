@@ -1,7 +1,11 @@
 # **Description**
 
-Node Server to insterface and control RFC Rasberry Pi
+Node Server to interface and control RFC Rasberry Pi
 
 <br>
+
+## **Use**
+
+Server should fire on startup
 
 

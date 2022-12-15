@@ -1,7 +1,6 @@
 "use strict";
 
 const dotenv = require('dotenv');
-const fetch = require('node-fetch');
 const logger = require('../config/logger.js');
 
 // Load Config
@@ -11,33 +10,19 @@ dotenv.config({ path: "./config/config.env" });
 const url = process.env.URL
 
 const deedlockerPi = {
-  async hello() {
-    const route = '/hello'
-  
-    const response = await fetch(`${url}${route}`);
-  
-    if (response.ok) {
-      logger.info("Success")
-      console.log(await response.json());
-    } else {
-      logger.error("Fail")
-      logger.error(response.status)
-    }
+  ChangeModeRead(req, res){
+    logger.info("Read Mode")
+
+    res.render("/index")
   },
-  
-  async getUsers() {
-    const route = '/getUsers'
-  
-    const response = await fetch(`${url}${route}`);
-  
-    if (response.ok) {
-      logger.info("Success")
-      console.log(await response.json());
-    } else {
-      logger.error("Fail")
-      logger.error(response.status)
-    }
-  }
+
+  ChangeModeWrite(req, res){
+    logger.info("Write Mode")
+
+    res.render("/index")
+  },
+
+
 }
 
 module.exports = deedlockerPi

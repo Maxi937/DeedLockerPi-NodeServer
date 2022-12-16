@@ -4,12 +4,6 @@ const dotenv = require("dotenv");
 const logger = require("../config/logger.js");
 const spawn = require("child_process").spawn;
 
-// Load Config
-dotenv.config({ path: "./config/config.env" });
-
-// Set Base URL
-const url = process.env.URL;
-
 const deedlockerPi = {
 
   ChangeModeRead(req, res) {

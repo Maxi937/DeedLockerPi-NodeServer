@@ -11,6 +11,7 @@ dotenv.config({ path: "./config/config.env" });
 const url = process.env.URL;
 
 const deedlockerPi = {
+
   ChangeModeRead(req, res) {
     logger.info("Read Mode");
     logger.info("Attempting to run 'python3 Deed-LockerPi/read_boxId.py");

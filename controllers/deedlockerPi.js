@@ -13,13 +13,25 @@ const deedlockerPi = {
   ChangeModeRead(req, res){
     logger.info("Read Mode")
 
-    res.render("/index")
+    try {
+      var spawn = require("child_process").spawn
+      var process = spawn('python',["./DeedLockerPi/read_boxId.py" ] );
+      process.stdout.on('data', function(data) {
+          console.log(data.toString());
+      } )
+    }
+    catch (err) {
+      logger.error(err)
+    }
+
+    
+    res.render("index")
   },
 
   ChangeModeWrite(req, res){
     logger.info("Write Mode")
 
-    res.render("/index")
+    res.render("index")
   },
 
 

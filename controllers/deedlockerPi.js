@@ -4,12 +4,6 @@ const dotenv = require("dotenv");
 const logger = require("../config/logger.js");
 const spawn = require("child_process").spawn;
 
-// Load Config
-dotenv.config({ path: "./config/config.env" });
-
-// Set Base URL
-const url = process.env.URL;
-
 const deedlockerPi = {
 
   ChangeModeRead(req, res) {
@@ -30,8 +24,8 @@ const deedlockerPi = {
 
   Response(req, res) {
     logger.info("Response from RPI");
-    logger.silly(req.body);
-    if (req.body != Null) {
+    if (req.body != "") {
+      console.log(req.body);
       res.sendStatus(200);
     }
   }

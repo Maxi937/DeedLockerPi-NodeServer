@@ -30,8 +30,8 @@ const deedlockerPi = {
 
   Response(req, res) {
     logger.info("Response from RPI");
-    logger.silly(req.body);
-    if (req.body != Null) {
+    if (req.body != "") {
+      console.log(req.body);
       res.sendStatus(200);
     }
   }

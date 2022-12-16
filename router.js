@@ -12,4 +12,8 @@ router.get("/", home.index);
 router.get("/deedlockerPi/Read", deedlockerPi.ChangeModeRead)
 router.get("/deedlockerPi/Write", deedlockerPi.ChangeModeWrite)
 
+// RPI Responses
+router.post("/deedlockerPi/Response", deedlockerPi.Response)
+
+
 module.exports = router;

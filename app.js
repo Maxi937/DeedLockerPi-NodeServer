@@ -7,6 +7,10 @@ const exphbs = require("express-handlebars");
 const router = require("./router");
 const logger = require("./config/logger");
 
+
+// Load env config
+dotenv.config({ path: "./config/config.env" });
+
 // Express
 var app = express();
 

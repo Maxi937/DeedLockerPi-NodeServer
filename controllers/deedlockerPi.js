@@ -4,19 +4,11 @@ const dotenv = require("dotenv");
 const logger = require("../config/logger.js");
 const spawn = require("child_process").spawn;
 
-// Load Config
-dotenv.config({ path: "./config/config.env" });
-
-// Set Base URL
-const url = process.env.URL;
-
 const deedlockerPi = {
+
   ChangeModeRead(req, res) {
     logger.info("Read Mode");
-    logger.info("Attempting to run 'python3 Deed-LockerPi/read_boxId.py");
-    var process = spawn("python3", [
-      "-u",
-      "/home/pi/Deed-LockerPi/read_boxId.py",
+    var process = spawn("python3", ["/home/pi/Deed-LockerPi/read_boxId.py",
       { detached: true, stdio: "ignore" },
     ]);
     res.render("index");
@@ -27,11 +19,20 @@ const deedlockerPi = {
     res.render("index");
   },
 
-  Response(req, res) {
+  rpiMessage(req, res) {
     logger.info("Response from RPI");
-    logger.silly(req.body);
-    if (req.body != Null) {
+    if (req.body != "") {
+      console.log(req.body);
       res.sendStatus(200);
+    }
+  },
+
+  locationUpdate(req, res) {
+    logger.info("Location Update from RPI");
+
+    if(req.body.code == 200){
+      logger.info("Sending Updated location to DeedLocker WebApp");
+      logger.info(req.body.data)
     }
   }
 };

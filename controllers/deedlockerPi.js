@@ -8,7 +8,7 @@ const deedlockerPi = {
 
   ChangeModeRead(req, res) {
     logger.info("Read Mode");
-    var process = spawn("python3", ["/home/pi/Deed-LockerPi/read_boxId.py",
+    var process = spawn("python3", ["/home/pi/DeedLockerPi/read_boxId.py",
       { detached: true, stdio: "ignore" },
     ]);
     res.render("index");
@@ -32,8 +32,9 @@ const deedlockerPi = {
 
     if(req.body.code == 200){
       logger.info("Sending Updated location to DeedLocker WebApp");
-      logger.info(req.body.data)
+      logger.info(`Box: ${req.body.data.boxId}, Location: ${req.body.data.location}`)
     }
+    res.sendStatus(200);
   }
 };
 

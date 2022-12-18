@@ -32,7 +32,7 @@ const deedlockerPi = {
 
     if(req.body.code == 200){
       logger.info("Sending Updated location to DeedLocker WebApp");
-      logger.info(`Box: ${req.body.data.boxId}, Location: ${req.body.data.location}`)
+      console.log(req.body)
     }
     res.sendStatus(200);
   }

@@ -31,19 +31,30 @@ const deedlockerPi = {
   async locationUpdate(req, res) {
     logger.info("Location Update from RPI");
     dotenv.config({ path: "./config/config.env" });
-    const body = req.body
+
+    const data = req.body.data
     const url = process.env.WEBAPPLOCALURL
+
+    // Add Timestamp
+    data.location.timestamp = new Date()
 
     if (req.body.code == 200) {
       logger.info("Sending Updated location to DeedLocker WebApp");
       const response = await fetch(`${url}/deedlockerPi/updateLocation`, {
         method: 'post',
-        body: JSON.stringify(body),
+        body: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json' }
       });
-      res.sendStatus(200);
+      if (response.status == 200) {
+        res.sendStatus(200);
+      }
+      else {
+        res.sendStatus(500);
+      }
+
     }
-    
+
+
   }
 };
 

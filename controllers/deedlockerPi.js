@@ -16,9 +16,22 @@ const deedlockerPi = {
     res.render("index");
   },
 
-  ChangeModeWrite(req, res) {
+  async ChangeModeWrite(req, res) {
     logger.info("Write Mode");
-    res.render("index");
+    dotenv.config({ path: "./config/config.env" });
+
+    const request = await fetch(`${process.env.WEBAPPLOCALURL}${process.env.GETDEEDBOXES}`, {
+      Method: 'GET',
+    })
+
+    const deedboxes = request.data.deedboxes.json()
+    console.log(deedboxes)
+    
+    const viewData = {
+      deedboxes
+    };
+
+    res.render("writeRfid", viewData);
   },
 
   rpiMessage(req, res) {

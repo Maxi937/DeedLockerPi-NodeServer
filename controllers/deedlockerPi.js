@@ -10,6 +10,7 @@ const deedlockerPi = {
   ChangeModeRead(req, res) {
     logger.info("Read Mode");
     var process = spawn("python3", ["/home/pi/DeedLockerPi/read_boxId.py",
+      "-u",
       { detached: true, stdio: "ignore" },
     ]);
     res.render("index");
@@ -38,23 +39,24 @@ const deedlockerPi = {
     // Add Timestamp
     data.location.timestamp = new Date()
 
-    if (req.body.code == 200) {
-      logger.info("Sending Updated location to DeedLocker WebApp");
-      const response = await fetch(`${url}/deedlockerPi/updateLocation`, {
-        method: 'post',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
-      });
-      if (response.status == 200) {
-        res.sendStatus(200);
+    try {
+      if (req.body.code == 200) {
+        logger.info("Sending Updated location to DeedLocker WebApp");
+        const response = await fetch(`${url}/deedlockerPi/updateLocation`, {
+          method: 'post',
+          body: JSON.stringify(data),
+          headers: { 'Content-Type': 'application/json' }
+        });
+        if (response.status == 200) {
+          res.sendStatus(200);
+        }
+        else {
+          res.sendStatus(500);
+        }
       }
-      else {
-        res.sendStatus(500);
-      }
-
+    } catch (err) {
+      res.sendStatus(500);
     }
-
-
   }
 };
 

@@ -1,0 +1,40 @@
+<section class="ui center aligned middle aligned segment">
+  <table class="ui unstackable short scrolling very basic table" id="clickableTable">
+    <thead>
+      <tr>
+        <th>Deed Box</th>
+        <th>RFID</th>
+        <th>Client<th>
+        <th></th>
+      </tr>
+    </thead>
+    {{#each deedboxes}}
+    <tbody>
+      <tr id="clickableRow-{{@index}}">
+        <td id="clickableRow-href-{{@index}}">
+          {{_id}}
+        </td>
+        <td>
+          {{#if rfid}}
+            {{rfid}}
+          {{else}}
+            Unassigned
+          {{/if}}
+        </td>
+        <td>
+          {{client.organisation}}
+        </td>
+        <td>
+          <a href='/writeBox/{{_id}}'>
+            <i class="bordered grey  link folder icon"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+    {{/each}}
+  </table>
+</section>
+
+<script>
+  clickableTable({{deedboxes.length}}, '/writebox')
+</script>

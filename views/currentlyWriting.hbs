@@ -18,11 +18,14 @@ let requestSent = 0
 for(let i = 0; i <= 5; i++) {
   if(requestSent === 0) {
     delay(i)
-  }
+  } 
 }
 
 function delay(i) {
   setTimeout(() => {
+    if (i == 4) {
+      window.location.href = "http://192.168.1.12:4000/deedlockerPi/Write"
+    }
     let rfid = Promise.resolve(checkIfRfidUpdated("{{boxId}}"))
     rfid.then((value) => {
       if (value != ""){

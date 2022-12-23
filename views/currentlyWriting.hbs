@@ -13,8 +13,26 @@
   </div>
 
 <script>
+let requestSent = 0
+
 for(let i = 0; i <= 5; i++) {
-  setTimeout(checkIfRfidUpdated, 5000, "{{boxId}}")
+  if(requestSent === 0) {
+    delay(i)
+  }
+  //setTimeout(checkIfRfidUpdated, 5000, "{{boxId}}")
 }
+
+function delay(i) {
+  setTimeout(() => {
+    let rfid = Promise.resolve(checkIfRfidUpdated("{{boxId}}"))
+    rfid.then((value) => {
+      if (value != ""){
+         window.location.href = "http://192.168.1.12:4000/";
+      }
+  // expected output: 123
+  }) 
+  }, 5000 * i);
+}
+
 //setTimeout(checkIfRfidUpdated, 10000, "{{boxId}}")
 </script>

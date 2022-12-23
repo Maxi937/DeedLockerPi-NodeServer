@@ -6,9 +6,7 @@ const home = {
     const viewData = {
       title: "Index",
     };
-
     logger.info("Rendering Index");
-
     res.render("index", viewData);
   },
 

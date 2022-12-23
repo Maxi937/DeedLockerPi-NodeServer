@@ -1,6 +1,7 @@
 "use strict";
 
 const dotenv = require("dotenv");
+const home = require('./home')
 const logger = require("../config/logger.js");
 const spawn = require('child_process').spawn;
 const exec = require('child_process').exec;
@@ -23,26 +24,35 @@ const deedlockerPi = {
     logger.info("Write Mode");
 
     const myexec = exec("killall python3");
-    const request = await fetch(`${process.env.WEBAPPLOCALURL}${process.env.GETDEEDBOXES}`)
-    const deedboxes = await request.json()
-  
-    const viewData = {
-      deedboxes
-    };
-    res.render("writeRfid", viewData);
+
+    try{
+      const request = await fetch(`${process.env.WEBAPPLOCALURL}${process.env.GETDEEDBOXES}`)
+      const deedboxes = await request.json()
+      const viewData = {
+        deedboxes
+      };
+      res.render("writeRfid", viewData);
+    } catch (err) {
+      res.redirect("index")
+    }
   },
 
   writeBoxIdToRFID(req, res){
-    logger.info("Writing ID to RFID")
     const boxId = req.params._id
 
     // spawn python process to write to the RFID
-    var process = spawn("python3", ["/home/pi/DeedLockerPi/write_boxId.py",
+    const process = spawn("python3", ["/home/pi/DeedLockerPi/write_boxId.py",
       boxId,
       "-u",
       { detached: true, stdio: "ignore" },
     ]);
-    res.render("index");
+
+    console.log(boxId)
+    
+    const viewData = {
+      boxId
+    }
+    res.render("currentlyWriting", viewData);
   },
 
   async updateRfid(req, res){

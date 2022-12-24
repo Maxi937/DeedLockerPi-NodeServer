@@ -7,6 +7,7 @@ const exphbs = require("express-handlebars");
 const router = require("./router");
 const logger = require("./config/logger");
 
+logger.info(__dirname)
 
 // Load env config
 dotenv.config({ path: "./config/config.env" });
@@ -19,7 +20,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Express Static Folder
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "./public")));
+
+app.set('views', path.join(__dirname, './views'));
 
 // Handlebars Helpers
 const { formatDate } = require("./config/hbs");

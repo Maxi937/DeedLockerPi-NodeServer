@@ -12,10 +12,16 @@ const deedlockerPi = {
   ChangeModeRead(req, res) {
     logger.info("Read Mode");
     const myexec = exec("killall python3");
+    exec("sudo -i");
     var process = spawn("python3", ["/home/pi/DeedLockerPi/read_boxId.py",
       "-u",
       { detached: true, stdio: "ignore" },
     ]);
+
+    process.stderr.on('data', (data) => {
+      console.error(`stderr: ${data}`);
+    });
+    
     res.render("index");
   },
 
@@ -46,6 +52,10 @@ const deedlockerPi = {
       "-u",
       { detached: true, stdio: "ignore" },
     ]);
+
+    process.stderr.on('data', (data) => {
+      logger.info(`stderr: ${data}`);
+    });
 
     console.log(boxId)
     

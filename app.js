@@ -9,9 +9,6 @@ const logger = require("./config/logger");
 
 logger.info(__dirname)
 
-// Load env config
-dotenv.config({ path: "./config/config.env" });
-
 // Express
 var app = express();
 
@@ -22,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 // Express Static Folder
 app.use(express.static(path.join(__dirname, "./public")));
 
+// Express Views Folder
 app.set('views', path.join(__dirname, './views'));
 
 // Handlebars Helpers
@@ -48,5 +46,5 @@ const PORT = process.env.PORT || 4000;
 
 app.listen(
   PORT,
-  logger.info(`Server Running in ${app.get("env")} mode on port ${PORT}`)
+  logger.info(`Server Running on port ${PORT}`)
 );

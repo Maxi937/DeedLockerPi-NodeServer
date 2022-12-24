@@ -46,8 +46,7 @@ const deedlockerPi = {
       "-u",
       { detached: true, stdio: "ignore" },
     ]);
-    console.log(boxId)
-    
+
     const viewData = {
       boxId
     }

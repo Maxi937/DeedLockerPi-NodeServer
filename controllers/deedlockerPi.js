@@ -26,7 +26,7 @@ const deedlockerPi = {
     const myexec = exec("killall python3");
 
     try{
-      const request = await fetch(`${process.env.WEBAPPLOCALURL}${process.env.GETDEEDBOXES}`)
+      const request = await fetch(`${process.env.URL}${process.env.GETDEEDBOXES}`)
       const deedboxes = await request.json()
       const viewData = {
         deedboxes
@@ -46,7 +46,6 @@ const deedlockerPi = {
       "-u",
       { detached: true, stdio: "ignore" },
     ]);
-
     const viewData = {
       boxId
     }

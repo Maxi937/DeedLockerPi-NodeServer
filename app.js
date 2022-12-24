@@ -7,8 +7,6 @@ const exphbs = require("express-handlebars");
 const router = require("./router");
 const logger = require("./config/logger");
 
-logger.info(__dirname)
-
 // Express
 var app = express();
 

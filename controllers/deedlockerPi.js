@@ -39,7 +39,7 @@ const deedlockerPi = {
       };
       res.render("writeRfid", viewData);
     } catch (err) {
-      res.redirect("index")
+      res.render("index")
     }
   },
 

@@ -29,7 +29,7 @@ function delay(i) {
     let rfid = Promise.resolve(checkIfRfidUpdated("{{boxId}}"))
     rfid.then((value) => {
       if (value != ""){
-         window.location.href = "http://192.168.1.12:4000/";
+         window.location.href = "http://192.168.1.12:4000/deedlockerPi/Write";
       }
   // expected output: 123
   }) 
